@@ -1,5 +1,4 @@
----
-format_version: '11'
+format_version: "11"
 default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 project_type: flutter
 workflows:
@@ -18,13 +17,13 @@ workflows:
     - flutter-installer@0:
         inputs:
         - version: 3.10.5
-        - is_update: 'false'
+        - is_update: "false"
     - flutter-analyze@0:
         inputs:
-        - project_location: "$BITRISE_FLUTTER_PROJECT_LOCATION"
+        - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
     - flutter-build@0:
         inputs:
-        - project_location: "$BITRISE_FLUTTER_PROJECT_LOCATION"
+        - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
         - platform: android
     - deploy-to-bitrise-io@2: {}
   primary:
@@ -39,19 +38,18 @@ workflows:
     - flutter-installer@0:
         inputs:
         - version: 3.10.5
-        - is_update: 'false'
+        - is_update: "false"
     - restore-dart-cache@1: {}
     - flutter-analyze@0:
         inputs:
-        - project_location: "$BITRISE_FLUTTER_PROJECT_LOCATION"
+        - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
     - flutter-build@0:
         inputs:
         - platform: android
     - save-dart-cache@1: {}
     - deploy-to-bitrise-io@2:
         inputs:
-        - deploy_path: "./"
-        - is_compress: 'true'
+        - is_compress: "true"
 meta:
   bitrise.io:
     stack: osx-xcode-14.2.x-ventura
@@ -60,9 +58,9 @@ app:
   envs:
   - opts:
       is_expand: false
-    BITRISE_FLUTTER_PROJECT_LOCATION: "."
+    BITRISE_FLUTTER_PROJECT_LOCATION: .
 trigger_map:
 - push_branch: main
   workflow: primary
-- pull_request_source_branch: "*"
+- pull_request_source_branch: '*'
   workflow: primary
